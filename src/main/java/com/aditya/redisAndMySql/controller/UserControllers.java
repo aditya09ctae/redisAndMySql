@@ -43,7 +43,7 @@ public class UserControllers {
     }
 
     @RequestMapping(value = "/show/redis/all")
-    public List<User> showRedisAllUser(){
+    public Map<Integer,User> showRedisAllUser(){
         return userRepoRedis.findAll();
     }
 

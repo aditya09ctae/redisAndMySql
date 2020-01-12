@@ -9,10 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Repository
@@ -30,25 +27,18 @@ public class UserRepoRedisImpl implements UserRepoRedis {
 
     @Override
     public User save(User user) {
-        hashOperations.put("USER",user.getId(),user);
-        return (User)hashOperations.get("USER",user.getId());
+        hashOperations.put("USER2",user.getId(),user);
+        return (User)hashOperations.get("USER2",user.getId());
     }
 
     @Override
-    public List<User> findAll() {
-        log.info("Data is :");
-        log.info(hashOperations.entries("USER").toString());
-        Map<Integer, User> userMap = hashOperations.entries("USER");
-        List<User> response = new ArrayList<>();
-        for(User userTemp : userMap.values()){
-            response.add(userTemp);
-        }
-        return response;
+    public Map<Integer,User> findAll() {
+        return hashOperations.entries("USER2");
     }
 
     @Override
     public User findById(Integer id) {
-        return (User)hashOperations.get("USER",id);
+        return (User)hashOperations.get("USER2",id);
     }
 
     @Override
@@ -58,6 +48,6 @@ public class UserRepoRedisImpl implements UserRepoRedis {
 
     @Override
     public void delete(Integer id) {
-        hashOperations.delete("USER",id);
+        hashOperations.delete("USER2",id);
     }
 }

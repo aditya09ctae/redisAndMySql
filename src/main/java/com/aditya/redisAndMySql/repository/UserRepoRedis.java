@@ -8,7 +8,7 @@ import java.util.Map;
 public interface UserRepoRedis {
 
     User save(User user);
-    List<User> findAll();
+    Map<Integer, User> findAll();
     User findById(Integer id);
     User update(User user);
     void delete(Integer id);
